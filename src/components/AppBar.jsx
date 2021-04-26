@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import theme from '../theme';
-import Text from './Text';
 import { Link } from 'react-router-native';
+import AppBarTab from './AppBarTab';
 
 const styles = StyleSheet.create({
     container: {
@@ -31,23 +31,13 @@ const AppBar = () => {
     return (
         <View style={styles.container}>
             <ScrollView horizontal>
-                <View style={{flex: 1}}>
-                    <Link to="/" component={TouchableOpacity}>
-                        <Text color="textSecondary" fontWeight="bold" fontSize="subheading" style={styles.text1} >Repositories</Text>
-                    </Link>
-                </View>
-            
-                
-         
-                <View style={{flex: 1}}>
-                    <Link to="/signin" component={TouchableOpacity} >
-                        <Text color="textSecondary" fontWeight="bold" fontSize="subheading" style={styles.text1} >Sign in</Text>
-                    </Link>
-                </View>
-                
+                <Link to="/" component={TouchableOpacity} style={{flex: 1}}>
+                    <AppBarTab text="Repositories"></AppBarTab>
+                </Link> 
+                <Link to="/signin" component={TouchableOpacity} style={{flex: 1}} >
+                    <AppBarTab text="Sign in"></AppBarTab>
+                </Link>
             </ScrollView>
-                
-            
         </View>
     );
 };

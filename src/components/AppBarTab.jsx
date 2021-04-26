@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import theme from '../theme';
-
+import Text from './Text';
 
 const styles = StyleSheet.create({
     container: {
@@ -19,14 +19,15 @@ const styles = StyleSheet.create({
         borderRightWidth: 20,
         backgroundColor: theme.colors.container,
         borderColor: theme.colors.container,
+                
     }
     
 });
 
-const AppBarTab = () => {
+const AppBarTab = ({text}) => {
     return (
-        <View style={styles.container}>
-         
+        <View> 
+            <Text color="textSecondary" fontWeight="bold" fontSize="subheading" style={styles.text1}>{text}</Text>  
         </View>
     );
 };
