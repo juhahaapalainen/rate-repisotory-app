@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
         marginVertical: 1,
         marginHorizontal: 1,
         marginBottom: 10,
+        marginRight: 10,
         borderBottomWidth: 10,
         borderBottomColor: theme.colors.container,   
     },
@@ -57,9 +58,9 @@ const RepositoryItem = ({fullName, description, language, stargazersCount, forks
                             uri: ownerAvatarUrl,
                         }}
                     />
-                    <View style={{flexDirection: 'column', display:'flex', justifyContent:'center', alignItems:'flex-start'}}>
+                    <View style={{flexDirection: 'column', display:'flex', justifyContent:'center', alignItems:'flex-start', flexGrow: 1}}>
                         <Text color="textPrimary" fontWeight="bold" fontSize="subheading">{fullName}</Text>
-                        <Text color="textPrimary" fontWeight="normal" fontSize="subheading">{description}</Text>
+                        <Text style={{flexShrink:1}} color="textPrimary" fontWeight="normal" fontSize="subheading">{description}</Text>
                         <Text color="textSecondary" style={styles.language}>{language}</Text>
                     </View>  
                 </View>            
