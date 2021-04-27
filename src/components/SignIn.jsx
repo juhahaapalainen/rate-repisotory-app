@@ -1,8 +1,10 @@
 import { Form, Formik } from 'formik';
 import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { Button, StyleSheet, TouchableOpacity, View } from 'react-native';
 import FormikTextInput from './FormikTextInput';
 import * as yup from 'yup';
+import Text from './Text';
+import theme from '../theme';
 
 
 const initialValues = {
@@ -12,9 +14,24 @@ const initialValues = {
 const styles = StyleSheet.create({
     input: {
         borderWidth: 1,
-        borderColor: 'grey',
         padding: 10,
         margin: 10,
+    },
+    button: {
+        
+        textAlign: 'center',
+        backgroundColor: theme.colors.primary,
+        paddingVertical: 5,
+        borderRadius: 10,
+        margin: 10,
+        marginBottom: 16,
+        borderWidth: 1,
+        fontWeight: theme.fontWeights.bold,
+        paddingHorizontal: 5,
+        justifyContent: 'center',  
+        color: theme.colors.textSecondary,
+        fontSize: theme.fontSizes.subheading,
+        fontFamily: theme.fonts.main,
     },
 });
 const validationSchema = yup.object().shape({
@@ -35,7 +52,10 @@ const SignInForm = ({ onSubmit}) => {
         <View>
             <FormikTextInput name="username" placeholder="Username" style={styles.input}/>
             <FormikTextInput name="password" placeholder="Password" secureTextEntry={true} style={styles.input}/>
-            <Button onPress={onSubmit} title="Sign in" style={{marginLeft: 10}}/>
+            <TouchableOpacity  onPress={onSubmit}>
+                <Text style={styles.button}>Sign in</Text>
+            </TouchableOpacity>
+            
         </View>
     );
 };
