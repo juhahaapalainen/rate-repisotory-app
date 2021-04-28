@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import theme from '../theme';
 import Text from './Text';
+import { Link } from 'react-router-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',  
     },
     text1: {
-        flexGrow: 0,
+        
         fontSize: theme.fontSizes.body,
         textAlignVertical: 'bottom',
         borderRightWidth: 20,
@@ -24,10 +25,13 @@ const styles = StyleSheet.create({
     
 });
 
-const AppBarTab = ({text}) => {
+const AppBarTab = ({text, path}) => {
     return (
         <View> 
-            <Text color="textSecondary" fontWeight="bold" fontSize="subheading" style={styles.text1}>{text}</Text>  
+            <Link to={path}>
+                <Text color="textSecondary" fontWeight="bold" fontSize="subheading" style={styles.text1}>{text}</Text>
+            </Link>
+              
         </View>
     );
 };

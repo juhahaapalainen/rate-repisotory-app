@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import theme from '../theme';
-import { Link } from 'react-router-native';
+import { Link, useHistory } from 'react-router-native';
 import AppBarTab from './AppBarTab';
+import useAuthorizedUser from '../hooks/useAuthorizedUser';
+import useAuthStorage from '../hooks/useAuthStorage';
+import { useApolloClient } from '@apollo/client';
 
 const styles = StyleSheet.create({
     container: {
@@ -28,16 +31,41 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+    const apolloClient = useApolloClient();
+    const authStorage = useAuthStorage();
+    const {authorizedUser} = useAuthorizedUser();
+    console.log('AUTHUSER:', authorizedUser);
+    const history = useHistory();
+
+    const signout = async () => {
+        await authStorage.removeAccessToken();
+        apolloClient.resetStore();
+        history.push('/');
+        console.log('SIGNOUT');
+    };
+
     return (
         <View style={styles.container}>
             <ScrollView horizontal>
-                <Link to="/" component={TouchableOpacity} style={{flex: 1}}>
-                    <AppBarTab text="Repositories"></AppBarTab>
-                </Link> 
-                <Link to="/signin" component={TouchableOpacity} style={{flex: 1}} >
-                    <AppBarTab text="Sign in"></AppBarTab>
-                </Link>
+              
+                <View style={{flex: 1}}>
+                    <Link to="/" text="Repositories" path="/" component={AppBarTab} />
+                    {/* <AppBarTab text="Repositories" path="/" ></AppBarTab> */}
+                </View>
+                <View style={{flex: 1}}>
+                    <Link to="/signin" text="Sign in" path="/signin" component={AppBarTab} />
+                    {/* { 
+                        authorizedUser === null && (
+                            <AppBarTab text="Sign in" path="/signin"></AppBarTab>)
+                    } 
+                    { 
+                        authorizedUser && (
+                            <AppBarTab text="Sign out" cb={signout} path="/"></AppBarTab> )
+                    
+                    }  */}
+                </View>
             </ScrollView>
+            
         </View>
     );
 };
